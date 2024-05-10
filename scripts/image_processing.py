@@ -46,11 +46,14 @@ def draw_boundingbox(image_num, x_0=None, x_1=None, y_0=None, y_1=None):
 def cropping_images(image_path, x_0, x_1, y_0, y_1):
     """Fuction used to crop all the images available"""
     image = cv2.imread(f"../data/train/{image_path}")
+    uncropped_image = []
     try:
         cropped = image[y_0:y_1, x_0:x_1]
         PIL_cropped = Image.fromarray(np.uint8(cropped)).convert('RGB')
         return PIL_cropped
     except:
+        uncropped_image.append(image)
+        print(uncropped_image)
         return None
 
 
@@ -61,10 +64,10 @@ def cropping_all_images():
 
     for index, row in data.iterrows():
         print(row['file'])
-        image_num = row['file'].split('/')[1]
-        cropped = cropping_images(image_num, row['x_0'], row['x_1'], row['y_0'], row['y_1'])
+        image = row['file'].split('/')[1]
+        cropped = cropping_images(image, row['x_0'], row['x_1'], row['y_0'], row['y_1'])
         if cropped:
-            cropped.save(f"../data/train/cropped/cropped_{image_num}.jpg")
+            cropped.save(f"../data/train/cropped/cropped_{image}")
     # function to be corrected when coordinates are outside of the image.
 
 
