@@ -27,10 +27,10 @@ def upload_bucket(blob_name, path_to_file, bucket_name):
 
 def upload_data():
     path = Path(os.getcwd())
-    mypath = str(path.parent.absolute())+'/data/train'
+    mypath = str(path.parent.absolute())+'/data/train/'
     onlyfiles = [f for f in os.listdir(mypath)]
     for file in onlyfiles:
-        path_to_file = mypath + '/' + file
+        path_to_file = mypath + file
         upload_bucket(file, path_to_file, bucket_name)
     return f'Data uploaded in {bucket_name}✅'
 
