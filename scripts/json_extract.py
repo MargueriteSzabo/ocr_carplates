@@ -40,7 +40,7 @@ def json_infos_loading(file):
                             'text': text, 'file':file}, index=[0])
     plate_infos = pd.concat([plate_infos, new_row],ignore_index=True)
 
-    plate_infos.to_csv('../data/plate_infos.cv')
+    plate_infos.to_csv('../data/plate_infos.csv')
 
     return plate_infos
 
